@@ -1,13 +1,31 @@
 "use client";
 
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Add Item
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems, isLoaded]);
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem("cart");
+
+    if (savedCart) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setCartItems(JSON.parse(savedCart));
+    }
+
+    setIsLoaded(true);
+  }, []);
+
+  // adding items
   const addToCart = (product) => {
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === product.id);
@@ -24,7 +42,7 @@ export const CartProvider = ({ children }) => {
     });
   };
 
-  // Increase
+  // increasing quantities
   const increaseQuantity = (id) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -33,7 +51,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Decrease
+  // decreasing quantities
   const decreaseQuantity = (id) => {
     setCartItems((prev) =>
       prev
@@ -44,7 +62,7 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  // Remove
+  // removing from cart
   const removeFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
@@ -57,6 +75,8 @@ export const CartProvider = ({ children }) => {
     );
   }, [cartItems]);
 
+  //   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <CartContext.Provider
       value={{
@@ -66,6 +86,9 @@ export const CartProvider = ({ children }) => {
         decreaseQuantity,
         removeFromCart,
         totalPrice,
+        // cartCount,
+        // clearCart,
+        isLoaded,
       }}
     >
       {children}

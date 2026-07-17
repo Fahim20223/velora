@@ -4,6 +4,9 @@ import Container from "../ui/Container";
 import Image from "next/image";
 import { FiRefreshCcw, FiShield, FiTruck } from "react-icons/fi";
 import { useCart } from "@/context/CartContext";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { FaLeftLong } from "react-icons/fa6";
 
 const ProductDetails = ({ product }) => {
   const {
@@ -24,6 +27,8 @@ const ProductDetails = ({ product }) => {
 
   const { addToCart } = useCart();
 
+  const router = useRouter();
+
   return (
     <div className="bg-white py-20">
       <Container>
@@ -39,7 +44,7 @@ const ProductDetails = ({ product }) => {
             />
           </div>
 
-          {/* Right */}
+          {/* right side */}
           <div>
             {/* Badge */}
             <span className="rounded-full bg-black px-4 py-2 text-xs font-medium uppercase tracking-widest text-white">
@@ -81,7 +86,7 @@ const ProductDetails = ({ product }) => {
                 Color
               </h3>
 
-              <div className="flex gap-3">
+              <div className="flex gap-8 items-center">
                 {colors.map((color) => (
                   <span
                     key={color}
@@ -90,6 +95,12 @@ const ProductDetails = ({ product }) => {
                     {color}
                   </span>
                 ))}
+                <button
+                  onClick={() => router.back()}
+                  className="btn rounded-full bg-black text-white transition hover:bg-gray-800"
+                >
+                  <FaLeftLong /> Back
+                </button>
               </div>
             </div>
 
@@ -118,7 +129,10 @@ const ProductDetails = ({ product }) => {
 
             {/*Add To Cart Button */}
             <button
-              onClick={() => addToCart(product)}
+              onClick={() => {
+                addToCart(product);
+                toast.success(`${product.name} added to cart`);
+              }}
               className="mt-12 h-14 w-full rounded-full bg-black text-white transition hover:bg-gray-800"
             >
               Add To Cart

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
   const {
@@ -13,7 +14,18 @@ const CartPage = () => {
     decreaseQuantity,
     removeFromCart,
     totalPrice,
+    isLoaded,
   } = useCart();
+
+  if (!isLoaded) {
+    return (
+      <div className="bg-white py-20">
+        <Container>
+          <p className="text-center text-gray-500">Loading...</p>
+        </Container>
+      </div>
+    );
+  }
 
   if (cartItems.length === 0) {
     return (
@@ -93,7 +105,10 @@ const CartPage = () => {
                 </p>
 
                 <button
-                  onClick={() => removeFromCart(item.id)}
+                  onClick={() => {
+                    removeFromCart(item.id);
+                    toast.info(`${item.name} removed from cart`);
+                  }}
                   className="mt-4 text-sm text-red-500 hover:underline"
                 >
                   Remove

@@ -1,36 +1,28 @@
-import React from "react";
+"use client";
 import Image from "next/image";
-import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
+// import { FiHeart } from "react-icons/fi";
 
 const ProductCard = ({ product }) => {
-  const { image, name, category, price } = product;
+  const { slug, image, badge, category, name, price, oldPrice } = product;
 
   return (
-    <article className="group cursor-pointer transition-all duration-300 hover:-translate-y-2">
+    <Link href={`/products/${slug}`} className="group block">
       {/* Image */}
-      <div className="relative overflow-hidden rounded-3xl bg-neutral-100">
+      <div className="relative overflow-hidden rounded-3xl bg-[#f7f7f7]">
+        {/* Badge */}
+        {badge && (
+          <span className="absolute left-4 top-4 z-10 rounded-full bg-white px-3 py-1 text-xs font-medium text-black shadow">
+            {badge}
+          </span>
+        )}
+
         {/* Wishlist */}
         {/* <button
-          className="
-            absolute
-            top-5
-            right-5
-            z-10
-            flex
-            h-10
-            w-10
-            items-center
-            justify-center
-            rounded-full
-            bg-white/90
-            opacity-0
-            shadow-sm
-            transition-all
-            duration-300
-            group-hover:opacity-100
-          "
+          className="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow transition hover:scale-110"
+          onClick={(e) => e.preventDefault()}
         >
-          <FiHeart className="text-lg" />
+          <FiHeart size={18} />
         </button> */}
 
         <Image
@@ -38,35 +30,31 @@ const ProductCard = ({ product }) => {
           alt={name}
           width={700}
           height={900}
-          className="
-            h-[420px]
-            w-full
-            object-cover
-            transition-transform
-            duration-500
-            group-hover:scale-105
-          "
+          className="h-[420px] w-full object-cover transition duration-500 group-hover:scale-105"
         />
       </div>
 
-      {/* Content */}
+      {/* Info */}
       <div className="mt-5">
-        <p className="text-xs uppercase tracking-[0.25em] text-gray-500">
+        <p className="text-xs font-medium uppercase tracking-[0.3em] text-gray-500">
           {category}
         </p>
 
-        <h3 className="mt-2 text-xl font-semibold text-gray-900">{name}</h3>
+        <h3 className="mt-2 text-xl font-semibold text-black transition group-hover:underline">
+          {name}
+        </h3>
 
-        <div className="mt-5 flex items-center justify-between">
-          <span className="text-lg font-semibold text-gray-900">৳ {price}</span>
+        <div className="mt-4 flex items-center gap-3">
+          <span className="text-lg font-semibold text-black">৳ {price}</span>
 
-          <button className="flex items-center gap-2 text-sm font-medium transition-all duration-300 group-hover:gap-3 text-black">
-            View
-            <FiArrowRight />
-          </button>
+          {oldPrice && (
+            <span className="text-sm text-gray-400 line-through">
+              ৳ {oldPrice}
+            </span>
+          )}
         </div>
       </div>
-    </article>
+    </Link>
   );
 };
 

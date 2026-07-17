@@ -16,10 +16,8 @@ const Newsletter = () => {
             priority
           />
 
-          {/* Overlay */}
           <div className="absolute inset-0 bg-black/60" />
 
-          {/* Content */}
           <div className="absolute inset-0 flex items-center justify-center px-6">
             <div className="w-full max-w-3xl text-center text-white">
               <span className="text-xs uppercase tracking-[0.4em] text-gray-300">

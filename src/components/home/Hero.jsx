@@ -20,7 +20,6 @@ const Hero = () => {
           <div className="grid grid-cols-1 items-center gap-16 md:grid-cols-2">
             {/* Left side */}
             <div>
-              {/* Badge */}
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#E5E7EB] bg-white px-5 py-2 shadow-sm">
                 <span className="h-2 w-2 rounded-full bg-[#C19A6B]" />
                 <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gray-600">
@@ -28,14 +27,12 @@ const Hero = () => {
                 </span>
               </div>
 
-              {/* Heading */}
               <h1 className="text-5xl font-extrabold leading-[1.05] tracking-tight text-gray-900 lg:text-7xl">
                 Timeless Fashion
                 <br />
                 <span className="text-[#C19A6B]">Made For You</span>
               </h1>
 
-              {/* Description */}
               <p className="mt-8 max-w-xl text-lg leading-8 text-gray-600">
                 Discover premium clothing crafted for comfort, confidence, and
                 modern living. Elevate your wardrobe with timeless essentials
@@ -59,7 +56,6 @@ const Hero = () => {
                 </Link>
               </div>
 
-              {/* Stats */}
               <div className="mt-16 grid grid-cols-3 gap-8">
                 <div>
                   <h3 className="text-3xl font-bold text-gray-900">50K+</h3>
@@ -94,7 +90,7 @@ const Hero = () => {
               {/* Floating Card
             <div className="absolute bottom-8 left-0 z-20 rounded-2xl bg-white p-5 shadow-xl">
               <p className="text-sm font-semibold text-gray-900">
-                ⭐ 4.9 Customer Rating
+                 4.9 Customer Rating
               </p>
               <p className="mt-1 text-sm text-gray-500">
                 Trusted by 50,000+ shoppers

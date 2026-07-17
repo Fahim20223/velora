@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import products from "@/data/products";
 import React, { useMemo, useState } from "react";
 import { FiSearch } from "react-icons/fi";
+import { motion } from "framer-motion";
 
 const categories = [
   "All",
@@ -49,7 +50,6 @@ const ProductPage = () => {
 
       <section className="pb-24">
         <Container>
-          {/* Top Toolbar */}
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
             {/* Search */}
             <div className="relative w-full max-w-md">
@@ -64,7 +64,6 @@ const ProductPage = () => {
               />
             </div>
 
-            {/* Sort */}
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
@@ -76,7 +75,6 @@ const ProductPage = () => {
             </select>
           </div>
 
-          {/* Categories */}
           <div className="mt-12 flex flex-wrap gap-3 text-black">
             {categories.map((category) => (
               <button
@@ -93,19 +91,22 @@ const ProductPage = () => {
             ))}
           </div>
 
-          {/* Count */}
           <div className="mt-10 mb-8 flex items-center justify-between text-black">
             <h3 className="text-xl font-semibold">
               {filteringProducts.length} Products
             </h3>
           </div>
 
-          {/* Grid */}
-          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3"
+          >
             {filteringProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
-          </div>
+          </motion.div>
         </Container>
       </section>
     </div>

@@ -7,6 +7,7 @@ import { useCart } from "@/context/CartContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { FaLeftLong } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 const ProductDetails = ({ product }) => {
   const {
@@ -32,8 +33,12 @@ const ProductDetails = ({ product }) => {
   return (
     <div className="bg-white py-20">
       <Container>
-        <div className="grid items-start gap-16 md:grid-cols-2">
-          {/* Left */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="grid items-start gap-16 md:grid-cols-2"
+        >
           <div className="overflow-hidden rounded-3xl bg-[#f7f7f7]">
             <Image
               src={image}
@@ -44,31 +49,25 @@ const ProductDetails = ({ product }) => {
             />
           </div>
 
-          {/* right side */}
           <div>
-            {/* Badge */}
             <span className="rounded-full bg-black px-4 py-2 text-xs font-medium uppercase tracking-widest text-white">
               {badge}
             </span>
 
-            {/* Category */}
             <p className="mt-8 text-sm uppercase tracking-[0.35em] text-gray-500">
               {category}
             </p>
 
-            {/* Name */}
             <h1 className="mt-3 text-4xl font-semibold leading-tight text-black lg:text-5xl">
               {name}
             </h1>
 
-            {/* Rating */}
             <div className="mt-5 flex items-center gap-3">
               <span className="text-yellow-500">⭐ {rating}</span>
 
               <span className="text-gray-400">({reviews} Reviews)</span>
             </div>
 
-            {/* Price */}
             <div className="mt-8 flex items-center gap-4">
               <span className="text-3xl font-bold text-black">৳ {price}</span>
 
@@ -77,10 +76,8 @@ const ProductDetails = ({ product }) => {
               </span>
             </div>
 
-            {/* Description */}
             <p className="mt-8 leading-8 text-gray-600">{description}</p>
 
-            {/* Color */}
             <div className="mt-10">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-black">
                 Color
@@ -104,7 +101,6 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
 
-            {/* Size */}
             <div className="mt-10">
               <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-black">
                 Size
@@ -165,7 +161,7 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </Container>
     </div>
   );

@@ -6,6 +6,7 @@ import Link from "next/link";
 import React from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 
 const CartPage = () => {
   const {
@@ -51,7 +52,12 @@ const CartPage = () => {
   }
 
   return (
-    <div className="bg-white py-20">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="bg-white py-20"
+    >
       <Container>
         <h1 className="mb-12 text-4xl font-bold text-black">Shopping Cart</h1>
 
@@ -124,7 +130,7 @@ const CartPage = () => {
           <h2 className="text-3xl font-bold text-black">৳ {totalPrice}</h2>
         </div>
       </Container>
-    </div>
+    </motion.div>
   );
 };
 

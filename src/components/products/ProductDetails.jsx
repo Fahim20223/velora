@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Container from "../ui/Container";
 import Image from "next/image";
 import { FiRefreshCcw, FiShield, FiTruck } from "react-icons/fi";
+import { useCart } from "@/context/CartContext";
 
 const ProductDetails = ({ product }) => {
   const {
@@ -20,6 +21,8 @@ const ProductDetails = ({ product }) => {
   } = product;
 
   const [selectedSize, setSelectedSize] = useState(sizes[0]);
+
+  const { addToCart } = useCart();
 
   return (
     <div className="bg-white py-20">
@@ -113,8 +116,11 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
 
-            {/* Button */}
-            <button className="mt-12 h-14 w-full rounded-full bg-black text-white transition hover:bg-gray-800">
+            {/*Add To Cart Button */}
+            <button
+              onClick={() => addToCart(product)}
+              className="mt-12 h-14 w-full rounded-full bg-black text-white transition hover:bg-gray-800"
+            >
               Add To Cart
             </button>
 

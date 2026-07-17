@@ -3,7 +3,6 @@ import ProductCard from "@/components/products/ProductCard";
 import ProductHeader from "@/components/products/ProductHeader";
 import Container from "@/components/ui/Container";
 import products from "@/data/products";
-import { a } from "framer-motion/client";
 import React, { useMemo, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 
